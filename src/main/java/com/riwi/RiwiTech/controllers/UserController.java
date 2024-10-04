@@ -48,8 +48,6 @@ public class UserController {
         return ResponseEntity.status(201).body(user);
     }
 
-
-
     @Operation(summary = "Get all users")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Users retrieved successfully")

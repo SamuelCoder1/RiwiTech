@@ -30,7 +30,11 @@ public class SecurityConfig {
 
     // Definición de los endpoints que solo pueden ser accedidos por ADMIN
     private final String[] ADMIN_ENDPOINTS = {
-            "/user/**", "/user/*/**"
+            "/user/create",
+            "/user/readById/**",
+            "/user/readAll",
+            "/user/update/**",
+            "/user/delete/**",
     };
 
     @Bean
