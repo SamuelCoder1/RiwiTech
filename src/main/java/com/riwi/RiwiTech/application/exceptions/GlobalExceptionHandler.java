@@ -1,5 +1,6 @@
 package com.riwi.RiwiTech.application.exceptions;
 
+
 import com.riwi.RiwiTech.application.dtos.exception.ResourceNotFoundException;
 import com.riwi.RiwiTech.application.dtos.exception.UnauthorizedAccessException;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UnauthorizedAccessException.class)
     public ResponseEntity<String> handleUnauthorizedAccess(UnauthorizedAccessException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)

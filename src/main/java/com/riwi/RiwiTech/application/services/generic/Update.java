@@ -1,7 +1,5 @@
 package com.riwi.RiwiTech.application.services.generic;
 
-import org.springframework.http.ResponseEntity;
-
-public interface Update<EntityRequest, Entity,ID> {
-    public Entity update( EntityRequest request,ID id);
+public interface Update<ID, Entity, EntityRequest> {
+    public Entity update(ID id, EntityRequest entity);
 }

@@ -1,4 +1,4 @@
-package com.riwi.RiwiTech.application.dtos.request;
+package com.riwi.RiwiTech.application.dtos.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

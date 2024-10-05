@@ -1,4 +1,4 @@
-package com.riwi.RiwiTech.application.dtos.request;
+package com.riwi.RiwiTech.application.dtos.requests;
 
 import com.riwi.RiwiTech.domain.entities.Task;
 import lombok.AllArgsConstructor;
@@ -7,18 +7,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-
 public class ProjectRequest {
 
         private String name;
 
-        private List<Task> tasks;
-
-        private List<UserRequestOnlyUsername> users;
+        private Set<TaskRequest> tasks;
 }

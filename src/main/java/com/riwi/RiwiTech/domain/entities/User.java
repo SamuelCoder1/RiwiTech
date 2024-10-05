@@ -45,11 +45,6 @@ public class User extends Auditable implements UserDetails {
 
 
     @Override
-    public String getUsername() {
-        return this.username;
-    }
-
-    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(this.role.name()));
     }

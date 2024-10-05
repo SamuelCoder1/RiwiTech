@@ -1,4 +1,4 @@
-package com.riwi.RiwiTech.application.dtos.response;
+package com.riwi.RiwiTech.application.dtos.responses;
 
 
 import com.riwi.RiwiTech.domain.entities.Project;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class TaskResponse {
 
-    private String description;
+    private Long id;
 
-    private Project project;
+    private String description;
 }

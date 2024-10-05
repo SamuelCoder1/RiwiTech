@@ -1,4 +1,4 @@
-package com.riwi.RiwiTech.application.dtos.request;
+package com.riwi.RiwiTech.application.dtos.requests;
 
 import com.riwi.RiwiTech.domain.entities.Project;
 import lombok.AllArgsConstructor;
@@ -12,6 +12,4 @@ import lombok.NoArgsConstructor;
 @Data
 public class TaskRequest {
     private String description;
-
-    private Project project;
 }
