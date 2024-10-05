@@ -6,7 +6,7 @@ import com.riwi.RiwiTech.domain.entities.Project;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(uses = TaskMapper.class) // Utiliza TaskMapper para mapear las tareas
 public interface ProjectMapper {
     ProjectMapper INSTANCE = Mappers.getMapper(ProjectMapper.class);
 
