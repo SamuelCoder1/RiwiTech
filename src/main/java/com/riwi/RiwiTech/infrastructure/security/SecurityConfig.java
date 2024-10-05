@@ -25,7 +25,9 @@ public class SecurityConfig {
             "/auth/login",
             "/user/register",
             "/swagger-ui/**",
-            "/v3/api-docs/**"
+            "/v3/api-docs/**",
+            "/projects/readById/**",
+            "/projects"
     };
 
     // Definición de los endpoints que solo pueden ser accedidos por ADMIN
@@ -35,6 +37,9 @@ public class SecurityConfig {
             "/user/readAll",
             "/user/update/**",
             "/user/delete/**",
+            "/projects/create",
+            "/projects/update/**",
+            "/projects/delete/**",
     };
 
     @Bean

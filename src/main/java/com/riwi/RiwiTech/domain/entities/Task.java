@@ -1,5 +1,6 @@
 package com.riwi.RiwiTech.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,4 @@ public class Task extends Auditable {
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
-
-
 }
