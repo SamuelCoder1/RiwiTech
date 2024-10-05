@@ -1,5 +1,6 @@
 package com.riwi.RiwiTech.application.services.impl;
 
+import com.riwi.RiwiTech.application.dtos.exception.GenericNotFoundExceptions;
 import com.riwi.RiwiTech.application.dtos.exception.UnauthorizedAccessException;
 import com.riwi.RiwiTech.application.dtos.requests.UserWithoutId;
 import com.riwi.RiwiTech.application.dtos.requests.UserWithoutIdAndRole;
@@ -27,7 +28,7 @@ public class UserService implements IUserService {
     @Override
     public User create(UserWithoutId userDTO) {
         if (!isAdmin()) {
-            throw new UnauthorizedAccessException("No estás autorizado para crear un usuario.");
+            throw new UnauthorizedAccessException("Access denied: Only an admin can create users.");
         }
 
         User user = User.builder()
@@ -52,13 +53,14 @@ public class UserService implements IUserService {
                 .build();
 
         userRepository.save(user);
+        System.out.println("Usuario saved: " + user);
         return user;
     }
 
     @Override
     public void delete(Long id) {
         if (!isAdmin()) {
-            throw new UnauthorizedAccessException("No estás autorizado para crear un usuario.");
+            throw new UnauthorizedAccessException("Access denied: Only an admin can delete users.");
         }
         userRepository.deleteById(id);
     }
@@ -66,7 +68,7 @@ public class UserService implements IUserService {
     @Override
     public List<User> readAll() {
         if (!isAdmin()) {
-            throw new UnauthorizedAccessException("No estás autorizado para crear un usuario.");
+            throw new UnauthorizedAccessException("Access denied: Only an admin can read users.");
         }
         return userRepository.findAll();
     }
@@ -74,27 +76,26 @@ public class UserService implements IUserService {
     @Override
     public Optional<User> readById(Long id) {
         if (!isAdmin()) {
-            throw new UnauthorizedAccessException("No estás autorizado para crear un usuario.");
+            throw new UnauthorizedAccessException("Access denied: Only an admin can read users.");
         }
         return userRepository.findById(id);
     }
 
     @Override
     public User update(Long id, UserWithoutId userDTO) {
-
         if (!isAdmin()) {
-            throw new UnauthorizedAccessException("No estás autorizado para crear un usuario.");
+            throw new UnauthorizedAccessException("Access denied: Only an admin can update users.");
         }
 
-        User user = User.builder()
-                .username(userDTO.getUsername())
-                .email(userDTO.getEmail())
-                .password(encryptPassword(userDTO.getPassword()))
-                .role(userDTO.getRole())
-                .build();
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new GenericNotFoundExceptions("User not found with id: " + id));
 
-        userRepository.save(user);
-        return user;
+        existingUser.setUsername(userDTO.getUsername());
+        existingUser.setEmail(userDTO.getEmail());
+        existingUser.setPassword(encryptPassword(userDTO.getPassword()));//Traer la contraseña, por si se quiere actualizar
+        existingUser.setRole(userDTO.getRole());
+
+        return userRepository.save(existingUser);
     }
 
     private String encryptPassword(String password) {

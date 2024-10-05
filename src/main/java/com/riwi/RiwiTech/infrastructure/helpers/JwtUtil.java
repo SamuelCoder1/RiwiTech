@@ -29,10 +29,11 @@ public class JwtUtil {
 
     // Método para generar el token JWT
     public String generateToken(User user) {
+        System.out.println("Generando token para el usuario: " + user.getUsername() + " con rol: " + user.getRole());
         return Jwts.builder()
                 .addClaims(Map.of(
                         "id", user.getId(),
-                        "role", user.getRole(),
+                        "role", user.getRole().name(),
                         "name", user.getUsername()
                 ))
                 .setSubject(user.getUsername()) // Usar el email como sujeto
@@ -76,7 +77,22 @@ public class JwtUtil {
     }
 
     public String extractRole(String token) {
+        if (token == null || token.isEmpty()) {
+            throw new IllegalArgumentException("El token no puede ser nulo o estar vacío");
+        }
+
         Claims claims = extractClaims(token);
-        return claims.get("role", String.class); // Ajusta según cómo esté configurado el rol en el token
+        System.out.println("Claims extraídos: " + claims); // Log para ver los claims
+
+        if (claims == null || !claims.containsKey("role")) {
+            throw new IllegalArgumentException("El rol no está presente en los claims del token");
+        }
+
+        String role = claims.get("role", String.class);
+        System.out.println("Rol extraído: " + role); // Log para verificar el rol extraído
+
+        return role; // Asegúrate de que 'role' esté en el formato correcto
     }
+
+
 }
