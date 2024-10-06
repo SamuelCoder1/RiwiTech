@@ -19,6 +19,4 @@ public class ProjectRequest {
         private String name;
 
         private Set<TaskRequest> tasks;
-
-
 }

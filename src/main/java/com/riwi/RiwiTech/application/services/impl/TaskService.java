@@ -68,6 +68,7 @@ public class TaskService implements ITaskService {
             Task updatedTask = TaskMapper.INSTANCE.toEntity(taskRequest);
 
             existingTask.setTitle(updatedTask.getTitle());
+
             existingTask.setDescription(updatedTask.getDescription());
 
             return taskRepository.save(existingTask);
