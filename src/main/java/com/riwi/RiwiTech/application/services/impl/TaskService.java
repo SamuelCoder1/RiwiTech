@@ -61,11 +61,13 @@ public class TaskService implements ITaskService {
     @Override
     public Task update(TaskRequest taskRequest, Long id) {
         Optional<Task> existingTaskOpt = taskRepository.findById(id);
-        // Verificamos si la tarea existe
+
         if (existingTaskOpt.isPresent()) {
             Task existingTask = existingTaskOpt.get();
-            // Usar el mapper para actualizar la tarea
+
             Task updatedTask = TaskMapper.INSTANCE.toEntity(taskRequest);
+
+            existingTask.setTitle(updatedTask.getTitle());
 
             existingTask.setDescription(updatedTask.getDescription());
 

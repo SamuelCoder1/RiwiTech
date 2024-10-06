@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class TaskRequest {
+    private String title;
     private String description;
 }

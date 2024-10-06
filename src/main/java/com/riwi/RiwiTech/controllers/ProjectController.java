@@ -31,8 +31,9 @@ public class ProjectController {
     })
     @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/create")
-    public ResponseEntity<ProjectRequest> create(@RequestBody ProjectRequest projectRequest) {
-        ProjectRequest createdProject = projectService.create(projectRequest);
+    public ResponseEntity<ProjectResponse> create(@RequestBody ProjectRequest projectRequest) {
+        ProjectResponse createdProject = projectService.create(projectRequest);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProject);
     }
 

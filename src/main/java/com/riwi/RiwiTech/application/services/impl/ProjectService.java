@@ -46,23 +46,22 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public ProjectRequest create(ProjectRequest projectRequest) {
+    public ProjectResponse create(ProjectRequest projectRequest) {
         Project project = ProjectMapper.INSTANCE.toEntity(projectRequest);
 
-        // Manejar las tareas si existen en el request
         if (projectRequest.getTasks() != null) {
             Set<Task> tasks = projectRequest.getTasks().stream()
-                    .map(TaskMapper.INSTANCE::toEntity) // Convertir cada TaskRequest a Task
+                    .map(TaskMapper.INSTANCE::toEntity) // Mapea cada TaskRequest a Task
                     .collect(Collectors.toSet());
 
             project.setTasks(tasks);
-            tasks.forEach(task -> task.setProject(project));
-        }else
+            tasks.forEach(task -> task.setProject(project)); // Establece la relación inversa
+        }
 
         projectRepository.save(project);
-        return projectRequest; // O puedes retornar un ProjectResponse
+        return ProjectMapper.INSTANCE.toResponseDto(project);
     }
-
+  
     @Override
     public Project update(ProjectRequest projectRequest, Long id) {
         Project existingProject = projectRepository.findById(id)

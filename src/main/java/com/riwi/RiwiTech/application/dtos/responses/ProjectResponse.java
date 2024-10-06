@@ -16,8 +16,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 public class ProjectResponse {
-
+    private Long id;
     private String name;
-
     private Set<TaskResponse> tasks;
 }
+
