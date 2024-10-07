@@ -27,7 +27,8 @@ public class SecurityConfig {
             "/swagger-ui/**",
             "/v3/api-docs/**",
             "/projects/readById/**",
-            "/projects"
+            "/projects",
+            "/email/send"
     };
 
     // Definición de los endpoints que solo pueden ser accedidos por ADMIN
